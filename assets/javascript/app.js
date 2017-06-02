@@ -1,34 +1,59 @@
 $(document).ready(function(){
 
-});
 
 
-$("button").on("click", function() {
-      var animal = $(this).attr("data-animal");
-      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
-        animal + "&api_key=dc6zaTOxFJmzC&limit=10";
-
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).done(function(response) {
-        // Step 1: Run this file, click a button, and see what the response object looks like in the browser's console.
-        // Open up the data key, then open up the 0th, element. Study the keys and how the JSON is structured.
-
-        var results = response.data;
-
-        for(var i=0; i<results.length; i++){
-          var animalDiv = $("div");
-
-          var p = $("<p>");
-          p.text(results[i].rating);
-          var animalImage = $("<img>");
-          animalImage.attr("src", results[i].images.fixed_height.url);
-          animalDiv.append(p);
-          animalDiv.append(animalImage);
-          $("#gifs-appear-here").prepend(animalDiv);
-          console.log(animalDiv);
-        }
-
-      });
+  function retrieveArticles(searchTerm, numToRetrieve, startYear, endYear){
+    console.log("here");
+    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    var parameters = $.param({
+      'api-key': "ab3aa28c8add469ca323c6117aeffb45",
+      'q': searchTerm,
+      'begin_date': startYear,
+      'end_date': endYear
     });
+
+    url += '?' + parameters;
+
+    $.ajax({
+      url: url,
+      method: 'GET',
+    }).done(function(result) {
+      console.log(result);
+      console.log(result.response.docs);
+      var articles = result.response.docs;
+
+      for(let i=0; i<articles.length; i++){
+        var headline = articles[i].headline.main;
+        console.log(headline);
+      }
+
+    }).fail(function(err) {
+      throw err;
+    });
+  }
+
+
+
+
+  $("#button1").on("click", function() {
+    var searchTerm = "Trump";
+    var numRecordsToRetrieve = 10;
+    var startYear = 1998+"0101";
+    var endYear = 2000+"1231";;
+
+    // var s = $("").val().trim();
+    // var numArticles = $("").val().trim();
+    // var startYear = $("").val().trim() + "0101";
+    // var endYear = $("").val().trim()+"1231";
+
+    retrieveArticles(searchTerm,numRecordsToRetrieve,startYear,endYear);
+  });
+  //       v
+
+
+
+
+
+
+
+});
