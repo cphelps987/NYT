@@ -24,7 +24,9 @@ $(document).ready(function(){
 
       for(let i=0; i<articles.length; i++){
         var headline = articles[i].headline.main;
+        var url = "";
         console.log(headline);
+        displayArticle(headline,url);
       }
 
     }).fail(function(err) {
@@ -32,7 +34,20 @@ $(document).ready(function(){
     });
   }
 
+  function displayArticle(headline, url){
+    var articleDiv = $("<div>")
+    articleDiv.attr("id", "articleDiv");
+    
+    var p = $("<p>")
+    p.text(headline);
+    var a = $("<a>");
+    a.attr("href", url);
 
+    articleDiv.append(p);
+    articleDiv.append(a);
+    $("body").append(articleDiv);
+
+  }
 
 
   $("#button1").on("click", function() {
