@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-
+  console.log("ha");
 
   function retrieveArticles(searchTerm, numToRetrieve, startYear, endYear){
     console.log("here");
@@ -37,7 +37,7 @@ $(document).ready(function(){
   function displayArticle(headline, url){
     var articleDiv = $("<div>")
     articleDiv.attr("id", "articleDiv");
-    
+
     var p = $("<p>")
     p.text(headline);
     var a = $("<a>");
