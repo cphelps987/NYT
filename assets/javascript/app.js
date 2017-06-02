@@ -8,8 +8,6 @@ $(document).ready(function(){
     var parameters = $.param({
       'api-key': "ab3aa28c8add469ca323c6117aeffb45",
       'q': searchTerm,
-      'begin_date': startYear,
-      'end_date': endYear
     });
 
     url += '?' + parameters;
@@ -50,20 +48,18 @@ $(document).ready(function(){
   }
 
 
-  $("#button1").on("click", function() {
-    var searchTerm = "Trump";
-    var numRecordsToRetrieve = 10;
-    var startYear = 1998+"0101";
-    var endYear = 2000+"1231";;
+  $("#submit").on("click", function() {
+    var searchTerm = $("#topic").val().trim();
+    var numArticles = $("#article-number").val().trim();
+    var startYear = $("#from-year").val().trim() + "0101";
+    var endYear = $("#to-year").val().trim()+"1231";
 
-    // var s = $("").val().trim();
-    // var numArticles = $("").val().trim();
-    // var startYear = $("").val().trim() + "0101";
-    // var endYear = $("").val().trim()+"1231";
-
-    retrieveArticles(searchTerm,numRecordsToRetrieve,startYear,endYear);
+    retrieveArticles(searchTerm,numArticles,startYear,endYear);
   });
-  //       v
+
+  $("#clear").on("click",function(){
+    
+  });
 
 
 
